@@ -46,15 +46,7 @@ public class FlutterPluginPdfViewerPlugin implements MethodChannel.MethodCallHan
     private final Object pluginLocker = new Object();
     private final String filePrefix = "FlutterPluginPdfViewer";
 
-    /**
-     * Plugin registration.
-     */
-    public static void registerWith(PluginRegistry.Registrar registrar) {
-        if (instance == null) {
-            instance = new FlutterPluginPdfViewerPlugin();
-        }
-        instance.onAttachedToEngine(registrar.context(), registrar.messenger());
-    }
+   
 
     public void onAttachedToEngine(Context applicationContext, BinaryMessenger messenger) {
         synchronized (initializationLock) {
@@ -67,9 +59,11 @@ public class FlutterPluginPdfViewerPlugin implements MethodChannel.MethodCallHan
         }
     }
 
-    @Override
-    public void onAttachedToEngine(FlutterPluginBinding binding) {
-        onAttachedToEngine(binding.getApplicationContext(), binding.getBinaryMessenger());
+   @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        this.context = flutterPluginBinding.getApplicationContext();
+        this.channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "flutter_plugin_pdf_viewer");
+        channel.setMethodCallHandler(this);
     }
 
     @Override
