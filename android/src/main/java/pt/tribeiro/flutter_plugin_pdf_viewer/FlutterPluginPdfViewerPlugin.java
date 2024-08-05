@@ -50,15 +50,15 @@ public class FlutterPluginPdfViewerPlugin implements MethodChannel.MethodCallHan
 
     public void onAttachedToEngine(Context applicationContext, BinaryMessenger messenger) {
         synchronized (initializationLock) {
-            if(flutterChannel != null) {
+            if (flutterChannel != null) {
                 return;
             }
             this.context = applicationContext;
-            flutterChannel = new MethodChannel(messenger,"flutter_plugin_pdf_viewer");
+            flutterChannel = new MethodChannel(messenger, "flutter_plugin_pdf_viewer");
             flutterChannel.setMethodCallHandler(this);
         }
     }
-
+    
    @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         this.context = flutterPluginBinding.getApplicationContext();
