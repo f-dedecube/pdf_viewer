@@ -1,5 +1,5 @@
 package pt.tribeiro.flutter_plugin_pdf_viewer;
-
+import io.flutter.plugin.common.MethodChannel;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
